@@ -1,5 +1,5 @@
 // MovieGrid component
-function MovieGrid() {
+function MovieGrid({ movies, characters, additionalCharacters }) {
   const [activeFilter, setActiveFilter] = React.useState('all');
   const [filteredMovies, setFilteredMovies] = React.useState([]);
   const [selectedMovie, setSelectedMovie] = React.useState(null);
@@ -19,15 +19,15 @@ function MovieGrid() {
   // Filter movies based on selected filter
   React.useEffect(() => {
     if (activeFilter === 'all') {
-      setFilteredMovies(moviesData);
+      setFilteredMovies(movies);
     } else if (activeFilter === 'phase1') {
-      setFilteredMovies(moviesData.filter((movie) => movie.phase === 1));
+      setFilteredMovies(movies.filter((movie) => movie.phase === 1));
     } else if (activeFilter === 'phase2') {
-      setFilteredMovies(moviesData.filter((movie) => movie.phase === 2));
+      setFilteredMovies(movies.filter((movie) => movie.phase === 2));
     } else if (activeFilter === 'phase3') {
-      setFilteredMovies(moviesData.filter((movie) => movie.phase === 3));
+      setFilteredMovies(movies.filter((movie) => movie.phase === 3));
     }
-  }, [activeFilter]);
+  }, [activeFilter, movies]);
 
   return (
     <section
@@ -120,7 +120,10 @@ function MovieGrid() {
         <MovieDetailsModal
           isOpen={isModalOpen}
           movie={selectedMovie}
-          onClose={closeModal} />
+          onClose={closeModal}
+          characters={characters}
+          additionalCharacters={additionalCharacters}
+          movies={movies} />
 
       </div>
     </section>);

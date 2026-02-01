@@ -1,3 +1,18 @@
+// Helper for character-specific colors
+const getCharacterColor = (name) => {
+  const colorMap = {
+    'Iron Man': 'rgba(229, 62, 62, 0.8)',
+    'Captain America': 'rgba(59, 130, 246, 0.8)',
+    'Thor': 'rgba(245, 158, 11, 0.8)',
+    'Hulk': 'rgba(16, 185, 129, 0.8)',
+    'Black Widow': 'rgba(220, 38, 38, 0.8)',
+    'Hawkeye': 'rgba(124, 58, 237, 0.8)',
+    'Scarlet Witch': 'rgba(124, 58, 237, 0.8)',
+    'Doctor Strange': 'rgba(76, 29, 149, 0.8)'
+  };
+  return colorMap[name] || 'rgba(107, 114, 128, 0.8)';
+};
+
 // ImageModal component for displaying large hero images
 function ImageModal({ isOpen, image, name, onClose }) {
   // If modal is not open, don't render anything
@@ -8,22 +23,6 @@ function ImageModal({ isOpen, image, name, onClose }) {
     if (e.target === e.currentTarget) {
       onClose();
     }
-  };
-
-  // Get character-specific color
-  const getCharacterColor = (name) => {
-    const colorMap = {
-      'Iron Man': 'rgba(229, 62, 62, 0.8)',
-      'Captain America': 'rgba(59, 130, 246, 0.8)',
-      'Thor': 'rgba(245, 158, 11, 0.8)',
-      'Hulk': 'rgba(16, 185, 129, 0.8)',
-      'Black Widow': 'rgba(220, 38, 38, 0.8)',
-      'Hawkeye': 'rgba(124, 58, 237, 0.8)',
-      'Scarlet Witch': 'rgba(124, 58, 237, 0.8)',
-      'Doctor Strange': 'rgba(76, 29, 149, 0.8)'
-    };
-
-    return colorMap[name] || 'rgba(107, 114, 128, 0.8)';
   };
 
   const characterColor = getCharacterColor(name);

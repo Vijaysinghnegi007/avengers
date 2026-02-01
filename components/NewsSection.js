@@ -1,5 +1,5 @@
 // NewsSection component
-function NewsSection() {
+function NewsSection({ news }) {
   return (
     <section
       id="news"
@@ -27,8 +27,8 @@ function NewsSection() {
           data-name="news-grid"
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-          {newsData.map((news) =>
-          <NewsCard key={news.id} news={news} />
+          {news.map((item) =>
+          <NewsCard key={item.id} news={item} />
           )}
         </div>
         

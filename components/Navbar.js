@@ -1,5 +1,5 @@
 // Navbar component
-function Navbar() {
+function Navbar({ links }) {
   const [isOpen, setIsOpen] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
 
@@ -55,7 +55,7 @@ function Navbar() {
           data-name="desktop-nav"
           className="hidden md:flex items-center space-x-8">
 
-          {navLinks.map((link, index) =>
+          {links.map((link, index) =>
           <a
             key={index}
             href={link.path}
@@ -85,7 +85,7 @@ function Navbar() {
         }>
 
         <div className="container-custom mx-auto px-4 flex flex-col space-y-4">
-          {navLinks.map((link, index) =>
+          {links.map((link, index) =>
           <a
             key={index}
             href={link.path}

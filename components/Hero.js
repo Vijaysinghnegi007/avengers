@@ -1,5 +1,26 @@
+// Animation constants
+const ANIMATION_INTERVALS = [300, 250, 350, 280, 320, 270];
+
+const HERO_POSITIONS = [
+  { left: '10%', top: '40%' }, // Iron Man
+  { left: '25%', top: '45%' }, // Captain America
+  { left: '40%', top: '35%' }, // Thor
+  { right: '40%', top: '45%' }, // Black Widow
+  { right: '25%', top: '40%' }, // Hulk
+  { right: '10%', top: '35%' } // Scarlet Witch
+];
+
+const HERO_COLORS = [
+  'rgba(229, 83, 83, 0.8)', // Iron Man - red
+  'rgba(59, 130, 246, 0.8)', // Captain America - blue
+  'rgba(245, 158, 11, 0.8)', // Thor - gold
+  'rgba(220, 38, 38, 0.8)', // Black Widow - red
+  'rgba(16, 185, 129, 0.8)', // Hulk - green
+  'rgba(124, 58, 237, 0.8)' // Scarlet Witch - purple
+];
+
 // Hero component with dynamic space emergence animation
-function Hero() {
+function Hero({ backgroundImages, characters, additionalCharacters }) {
   // Use React.useState to track the loaded state of background image and animation states
   const [bgLoaded, setBgLoaded] = React.useState(false);
   const [animationStarted, setAnimationStarted] = React.useState(false);
@@ -19,7 +40,7 @@ function Hero() {
   React.useEffect(() => {
     // Load background image
     const img = new Image();
-    img.src = heroBackgroundImages[0];
+    img.src = backgroundImages[0];
     img.onload = () => {
       setBgLoaded(true);
 
@@ -48,32 +69,9 @@ function Hero() {
       const maxHeroes = 6; // Total number of heroes
       let currentIndex = 0;
 
-      // Use varying intervals for more natural appearance - heroes jumping at different times
-      const animationIntervals = [300, 250, 350, 280, 320, 270]; // Milliseconds between each hero
-
-      // Hero positions for jumping
-      const heroPositions = [
-      { left: '10%', top: '40%' }, // Iron Man
-      { left: '25%', top: '45%' }, // Captain America
-      { left: '40%', top: '35%' }, // Thor
-      { right: '40%', top: '45%' }, // Black Widow
-      { right: '25%', top: '40%' }, // Hulk
-      { right: '10%', top: '35%' } // Scarlet Witch
-      ];
-
-      // Hero colors for jump trails
-      const heroColors = [
-      'rgba(229, 83, 83, 0.8)', // Iron Man - red
-      'rgba(59, 130, 246, 0.8)', // Captain America - blue
-      'rgba(245, 158, 11, 0.8)', // Thor - gold
-      'rgba(220, 38, 38, 0.8)', // Black Widow - red
-      'rgba(16, 185, 129, 0.8)', // Hulk - green
-      'rgba(124, 58, 237, 0.8)' // Scarlet Witch - purple
-      ];
-
       // Show spaceship and get hero positions
       setSpaceshipVisible(true);
-      const spaceshipData = { heroPositions, heroColors };
+      const spaceshipData = { heroPositions: HERO_POSITIONS, heroColors: HERO_COLORS };
 
       // Animate heroes jumping from spaceship
       const showNextHero = () => {
@@ -135,7 +133,7 @@ function Hero() {
             currentIndex++;
 
             if (currentIndex < maxHeroes) {
-              setTimeout(showNextHero, animationIntervals[currentIndex - 1]);
+              setTimeout(showNextHero, ANIMATION_INTERVALS[currentIndex - 1]);
             } else {
               // All heroes have jumped, make spaceship leave
               setSpaceshipDeparture(true);
@@ -148,7 +146,7 @@ function Hero() {
       setTimeout(showNextHero, 800);
 
       // After all heroes have appeared, add floating animation
-      const totalDelay = 800 + animationIntervals.reduce((sum, interval) => sum + interval, 0) + 300 * maxHeroes;
+      const totalDelay = 800 + ANIMATION_INTERVALS.reduce((sum, interval) => sum + interval, 0) + 300 * maxHeroes;
       setTimeout(() => {
         setIsFloating(true);
       }, totalDelay);
@@ -177,7 +175,7 @@ function Hero() {
         data-name="space-background"
         className="absolute inset-0 bg-black z-0 space-bg"
         style={{
-          backgroundImage: `url('${heroBackgroundImages[0]}')`,
+          backgroundImage: `url('${backgroundImages[0]}')`,
           backgroundSize: 'cover',
           backgroundPosition: 'top center', /* Top position to show the spaceship at the top */
           filter: 'brightness(0.8) contrast(1.5) saturate(1.2)', /* Enhanced visibility for spaceship */
@@ -382,10 +380,10 @@ function Hero() {
                 zIndex: 20, /* Ensure heroes are above particles */
                 transformOrigin: 'center top' /* Origin for jump animation */
               }}
-              onClick={() => handleHeroClick({ name: 'Iron Man', image: charactersData[0].image })}>
+              onClick={() => handleHeroClick({ name: 'Iron Man', image: characters[0].image })}>
 
               <img
-                src={charactersData[0].image}
+                src={characters[0].image}
                 alt="Iron Man"
                 className="h-full object-contain hero-cosmic-effect"
                 style={{ filter: 'drop-shadow(0 0 15px rgba(229, 83, 83, 0.9))' }} />
@@ -409,10 +407,10 @@ function Hero() {
                 zIndex: 20, /* Ensure heroes are above particles */
                 transformOrigin: 'center top' /* Origin for jump animation */
               }}
-              onClick={() => handleHeroClick({ name: 'Captain America', image: charactersData[1].image })}>
+              onClick={() => handleHeroClick({ name: 'Captain America', image: characters[1].image })}>
 
               <img
-                src={charactersData[1].image}
+                src={characters[1].image}
                 alt="Captain America"
                 className="h-full object-contain hero-cosmic-effect"
                 style={{ filter: 'drop-shadow(0 0 15px rgba(59, 130, 246, 0.9))' }} />
@@ -436,10 +434,10 @@ function Hero() {
                 zIndex: 20, /* Ensure heroes are above particles */
                 transformOrigin: 'center top' /* Origin for jump animation */
               }}
-              onClick={() => handleHeroClick({ name: 'Thor', image: charactersData[2].image })}>
+              onClick={() => handleHeroClick({ name: 'Thor', image: characters[2].image })}>
 
               <img
-                src={charactersData[2].image}
+                src={characters[2].image}
                 alt="Thor"
                 className="h-full object-contain hero-cosmic-effect"
                 style={{ filter: 'drop-shadow(0 0 20px rgba(245, 158, 11, 0.9))' }} />
@@ -463,7 +461,7 @@ function Hero() {
                 zIndex: 20, /* Ensure heroes are above particles */
                 transformOrigin: 'center top' /* Origin for jump animation */
               }}
-              onClick={() => handleHeroClick({ name: 'Black Widow', image: charactersData[4].image })}>
+              onClick={() => handleHeroClick({ name: 'Black Widow', image: characters[4].image })}>
 
               <img
                 src="https://newoaks.s3.us-west-1.amazonaws.com/AutoDev/8360/0549eb2c-ead1-46c0-8b50-3bef2e22bd87.jpeg"
@@ -490,10 +488,10 @@ function Hero() {
                 zIndex: 20, /* Ensure heroes are above particles */
                 transformOrigin: 'center top' /* Origin for jump animation */
               }}
-              onClick={() => handleHeroClick({ name: 'Hulk', image: charactersData[3].image })}>
+              onClick={() => handleHeroClick({ name: 'Hulk', image: characters[3].image })}>
 
               <img
-                src={charactersData[3].image}
+                src={characters[3].image}
                 alt="Hulk"
                 className="h-full object-contain hero-cosmic-effect"
                 style={{ filter: 'drop-shadow(0 0 15px rgba(16, 185, 129, 0.9))' }} />
@@ -517,10 +515,10 @@ function Hero() {
                 zIndex: 20, /* Ensure heroes are above particles */
                 transformOrigin: 'center top' /* Origin for jump animation */
               }}
-              onClick={() => handleHeroClick({ name: 'Scarlet Witch', image: additionalCharactersData[1].image })}>
+              onClick={() => handleHeroClick({ name: 'Scarlet Witch', image: additionalCharacters[1].image })}>
 
               <img
-                src={additionalCharactersData[1].image}
+                src={additionalCharacters[1].image}
                 alt="Scarlet Witch"
                 className="h-full object-contain hero-cosmic-effect"
                 style={{ filter: 'drop-shadow(0 0 15px rgba(124, 58, 237, 0.9))' }} />

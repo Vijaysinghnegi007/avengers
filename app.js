@@ -30,96 +30,49 @@ function App() {
     let criticalLoadedCount = 0;
     const totalCriticalImages = criticalImages.length;
 
-    // First load critical images
-    setLoadingStage('Loading essential assets...');
-
-    const loadCriticalImages = () => {
+    const loadImage = (src) => {
       return new Promise((resolve) => {
-        if (criticalImages.length === 0) {
-          resolve();
-          return;
-        }
-
-        criticalImages.forEach((imgSrc) => {
-          const img = new Image();
-          img.src = imgSrc;
-
-          img.onload = () => {
-            criticalLoadedCount++;
-            setLoadingProgress(Math.floor(criticalLoadedCount / totalCriticalImages * 50)); // First 50%
-            if (criticalLoadedCount === totalCriticalImages) {
-              resolve();
-            }
-          };
-
-          img.onerror = () => {
-            console.error(`Failed to load critical image: ${imgSrc}`);
-            criticalLoadedCount++;
-            setLoadingProgress(Math.floor(criticalLoadedCount / totalCriticalImages * 50));
-            if (criticalLoadedCount === totalCriticalImages) {
-              resolve();
-            }
-          };
-        });
-
-        // Shorter fallback for critical images to prevent long black screen
-        setTimeout(() => {
-          if (criticalLoadedCount < totalCriticalImages) {
-            console.warn('Using fallback timer for critical images');
-            resolve();
-          }
-        }, 3000);
+        const img = new Image();
+        img.src = src;
+        img.onload = () => resolve({ src, success: true });
+        img.onerror = () => {
+          console.error(`Failed to load image: ${src}`);
+          resolve({ src, success: false });
+        };
+        // Shorter timeout to prevent long black screen
+        setTimeout(resolve, 3000);
       });
     };
 
+    // First load critical images
+    const loadCriticalImages = async () => {
+      setLoadingStage('Loading essential assets...');
+      if (criticalImages.length === 0) return;
+
+      let loadedCount = 0;
+      await Promise.all(criticalImages.map(src =>
+        loadImage(src).then(res => {
+          loadedCount++;
+          setLoadingProgress(Math.floor((loadedCount / criticalImages.length) * 50));
+          return res;
+        })
+      ));
+    };
+
     // Then load secondary images
-    const loadSecondaryImages = () => {
-      return new Promise((resolve) => {
-        setLoadingStage('Assembling heroes...');
+    const loadSecondaryImages = async () => {
+      setLoadingStage('Assembling heroes...');
+      if (secondaryImages.length === 0) return;
 
-        if (secondaryImages.length === 0) {
-          resolve();
-          return;
-        }
-
-        let secondaryLoadedCount = 0;
-        const totalSecondaryImages = secondaryImages.length;
-
-        secondaryImages.forEach((imgSrc) => {
-          const img = new Image();
-          img.src = imgSrc;
-
-          img.onload = () => {
-            secondaryLoadedCount++;
-            // Calculate progress from 50% to 100%
-            const secondaryProgress = Math.floor(secondaryLoadedCount / totalSecondaryImages * 50);
-            setLoadingProgress(50 + secondaryProgress);
-
-            if (secondaryLoadedCount === totalSecondaryImages) {
-              resolve();
-            }
-          };
-
-          img.onerror = () => {
-            console.error(`Failed to load secondary image: ${imgSrc}`);
-            secondaryLoadedCount++;
-            const secondaryProgress = Math.floor(secondaryLoadedCount / totalSecondaryImages * 50);
-            setLoadingProgress(50 + secondaryProgress);
-
-            if (secondaryLoadedCount === totalSecondaryImages) {
-              resolve();
-            }
-          };
-        });
-
-        // Shorter fallback for secondary images
-        setTimeout(() => {
-          if (secondaryLoadedCount < totalSecondaryImages) {
-            console.warn('Using fallback timer for secondary images');
-            resolve();
-          }
-        }, 2000);
-      });
+      let loadedCount = 0;
+      await Promise.all(secondaryImages.map(src =>
+        loadImage(src).then(res => {
+          loadedCount++;
+          const secondaryProgress = Math.floor((loadedCount / secondaryImages.length) * 50);
+          setLoadingProgress(50 + secondaryProgress);
+          return res;
+        })
+      ));
     };
 
     // Execute loading sequence
@@ -186,14 +139,26 @@ function App() {
 
   return (
     <div data-name="app-container" className="min-h-screen bg-black">
-      <Navbar />
-      <Hero />
-      <MovieGrid />
-      <CharacterGrid />
-      <Timeline />
-      <NewsSection />
-      <FAQ />
-      <Footer />
+      <Navbar links={navLinks} />
+      <Hero
+        backgroundImages={heroBackgroundImages}
+        characters={charactersData}
+        additionalCharacters={additionalCharactersData}
+      />
+      <MovieGrid
+        movies={moviesData}
+        characters={charactersData}
+        additionalCharacters={additionalCharactersData}
+      />
+      <CharacterGrid
+        charactersData={charactersData}
+        additionalCharactersData={additionalCharactersData}
+        backgroundImage={heroBackgroundImages[1]}
+      />
+      <Timeline timeline={timelineData} />
+      <NewsSection news={newsData} />
+      <FAQ faq={faqData} />
+      <Footer links={navLinks} />
       <BackgroundMusic />
     </div>);
 

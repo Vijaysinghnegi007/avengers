@@ -1,22 +1,20 @@
+// Helper for character-specific colors
+const getCharacterColor = (name) => {
+  const colorMap = {
+    'Iron Man': 'rgba(229, 62, 62, 0.8)',
+    'Captain America': 'rgba(59, 130, 246, 0.8)',
+    'Thor': 'rgba(245, 158, 11, 0.8)',
+    'Hulk': 'rgba(16, 185, 129, 0.8)',
+    'Black Widow': 'rgba(220, 38, 38, 0.8)',
+    'Hawkeye': 'rgba(124, 58, 237, 0.8)'
+  };
+  return colorMap[name] || 'rgba(107, 114, 128, 0.8)';
+};
+
 // CharacterCard component
 function CharacterCard({ character }) {
   const [showDetails, setShowDetails] = React.useState(false);
   const [modalOpen, setModalOpen] = React.useState(false);
-
-  // Character-specific color mapping
-  const getCharacterColor = (name) => {
-    const colorMap = {
-      'Iron Man': 'rgba(229, 62, 62, 0.8)',
-      'Captain America': 'rgba(59, 130, 246, 0.8)',
-      'Thor': 'rgba(245, 158, 11, 0.8)',
-      'Hulk': 'rgba(16, 185, 129, 0.8)',
-      'Black Widow': 'rgba(220, 38, 38, 0.8)',
-      'Hawkeye': 'rgba(124, 58, 237, 0.8)'
-    };
-
-    return colorMap[name] || 'rgba(107, 114, 128, 0.8)';
-  };
-
   const characterColor = getCharacterColor(character.name);
 
   return (

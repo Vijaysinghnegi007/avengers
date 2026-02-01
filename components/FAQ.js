@@ -1,5 +1,5 @@
 // FAQ component
-function FAQ() {
+function FAQ({ faq }) {
   const [openIndex, setOpenIndex] = React.useState(0);
   const [showContactInfo, setShowContactInfo] = React.useState(false);
 
@@ -38,7 +38,7 @@ function FAQ() {
           data-name="faq-accordion"
           className="max-w-3xl mx-auto">
 
-          {faqData.map((faq, index) =>
+          {faq.map((item, index) =>
           <div
             key={index}
             data-name={`faq-item-${index}`}
@@ -52,7 +52,7 @@ function FAQ() {
               className="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none"
               onClick={() => toggleFAQ(index)}>
 
-                <span className="text-white font-medium">{faq.question}</span>
+                <span className="text-white font-medium">{item.question}</span>
                 <i
                 className={`fas ${openIndex === index ? 'fa-minus' : 'fa-plus'} text-avengers-red transition-transform duration-300 ${
                 openIndex === index ? 'transform rotate-180' : ''}`
@@ -67,7 +67,7 @@ function FAQ() {
               openIndex === index ? 'max-h-96 pb-6' : 'max-h-0'}`
               }>
 
-                <p className="text-gray-300">{faq.answer}</p>
+                <p className="text-gray-300">{item.answer}</p>
               </div>
             </div>
           )}

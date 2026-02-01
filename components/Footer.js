@@ -1,5 +1,5 @@
 // Footer component
-function Footer() {
+function Footer({ links }) {
   return (
     <footer
       data-name="footer"
@@ -67,7 +67,7 @@ function Footer() {
               Quick Links
             </h3>
             <ul className="space-y-2">
-              {navLinks.map((link, index) =>
+              {links.map((link, index) =>
               <li key={index}>
                   <a
                   href={link.path}

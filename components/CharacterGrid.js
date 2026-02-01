@@ -1,5 +1,5 @@
 // CharacterGrid component
-function CharacterGrid() {
+function CharacterGrid({ charactersData, additionalCharactersData, backgroundImage }) {
   const [activeFilter, setActiveFilter] = React.useState('all');
   const [characters, setCharacters] = React.useState([]);
 
@@ -12,7 +12,7 @@ function CharacterGrid() {
     } else if (activeFilter === 'new') {
       setCharacters(additionalCharactersData);
     }
-  }, [activeFilter]);
+  }, [activeFilter, charactersData, additionalCharactersData]);
 
   return (
     <section
@@ -25,7 +25,7 @@ function CharacterGrid() {
         data-name="cosmic-background"
         className="absolute inset-0 opacity-20"
         style={{
-          backgroundImage: `url('${heroBackgroundImages[1]}')`,
+          backgroundImage: `url('${backgroundImage}')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           filter: 'brightness(0.3) contrast(1.2)'

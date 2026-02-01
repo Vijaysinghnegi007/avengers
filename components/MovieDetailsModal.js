@@ -1,5 +1,23 @@
+// Helpers
+const formatRuntime = (minutes) => {
+  if (!minutes) return 'N/A';
+  const hours = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+  return `${hours}h ${mins}m`;
+};
+
+const getPhaseColor = (phase) => {
+  const phaseColors = {
+    1: 'var(--avengers-red)',
+    2: 'var(--avengers-gold)',
+    3: 'var(--avengers-blue)',
+    4: 'var(--avengers-purple)'
+  };
+  return phaseColors[phase] || 'var(--avengers-red)';
+};
+
 // MovieDetailsModal component
-function MovieDetailsModal({ isOpen, movie, onClose }) {
+function MovieDetailsModal({ isOpen, movie, onClose, characters, additionalCharacters, movies }) {
   // If modal is not open or no movie is provided, don't render anything
   if (!isOpen || !movie) return null;
 
@@ -13,45 +31,19 @@ function MovieDetailsModal({ isOpen, movie, onClose }) {
     }
   };
 
-  // Format runtime (assuming minutes)
-  const formatRuntime = (minutes) => {
-    if (!minutes) return 'N/A';
-    const hours = Math.floor(minutes / 60);
-    const mins = minutes % 60;
-    return `${hours}h ${mins}m`;
-  };
-
-  // Format release date
-  const formatReleaseDate = (date) => {
-    if (!date) return movie.year.toString();
-    return date;
-  };
-
-  // Get phase color
-  const getPhaseColor = (phase) => {
-    const phaseColors = {
-      1: 'var(--avengers-red)',
-      2: 'var(--avengers-gold)',
-      3: 'var(--avengers-blue)',
-      4: 'var(--avengers-purple)'
-    };
-
-    return phaseColors[phase] || 'var(--avengers-red)';
-  };
-
   // Get relevant characters for this movie
   const getRelevantCharacters = () => {
     if (movie.mainCharacters) {
-      return charactersData.filter((char) =>
+      return (characters || []).filter((char) =>
       movie.mainCharacters.includes(char.name)
       ).concat(
-        additionalCharactersData.filter((char) =>
+        (additionalCharacters || []).filter((char) =>
         movie.mainCharacters.includes(char.name)
         )
       );
     }
     // Fallback to showing some characters
-    return charactersData.slice(0, 4);
+    return (characters || []).slice(0, 4);
   };
 
   return (
@@ -360,7 +352,7 @@ function MovieDetailsModal({ isOpen, movie, onClose }) {
 
               {/* Generate some featured characters based on the movie */}
               {/* We'll show a subset of characters that might appear in this movie */}
-              {charactersData.slice(0, 4).map((character) =>
+              {(characters || []).slice(0, 4).map((character) =>
                 <div
                   key={character.id}
                   data-name={`featured-character-${character.id}`}
@@ -393,7 +385,7 @@ function MovieDetailsModal({ isOpen, movie, onClose }) {
                 className="space-y-3">
 
               {/* Show movies from the same phase */}
-              {moviesData.
+              {(movies || []).
                 filter((m) => m.phase === movie.phase && m.id !== movie.id).
                 slice(0, 3).
                 map((relatedMovie) =>
@@ -560,7 +552,7 @@ function MovieDetailsModal({ isOpen, movie, onClose }) {
                 data-name="same-phase-movies"
                 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-                {moviesData.
+                {(movies || []).
                 filter((m) => m.phase === movie.phase && m.id !== movie.id).
                 slice(0, 3).
                 map((relatedMovie) =>
@@ -601,7 +593,7 @@ function MovieDetailsModal({ isOpen, movie, onClose }) {
                 data-name="timeline-visualization"
                 className="relative py-8 px-4 border-l-2 border-gray-800">
 
-                {moviesData.
+                {(movies || []).
                 filter((m) => Math.abs(m.id - movie.id) <= 2 && m.id !== movie.id).
                 sort((a, b) => a.id - b.id).
                 map((timelineMovie, index) =>

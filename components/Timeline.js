@@ -1,17 +1,17 @@
 // Timeline component
-function Timeline() {
+function Timeline({ timeline }) {
   const [activePhase, setActivePhase] = React.useState('all');
   const [filteredEvents, setFilteredEvents] = React.useState([]);
 
   // Filter timeline events based on selected phase
   React.useEffect(() => {
     if (activePhase === 'all') {
-      setFilteredEvents(timelineData);
+      setFilteredEvents(timeline);
     } else {
       const phaseNumber = parseInt(activePhase.replace('phase', ''));
-      setFilteredEvents(timelineData.filter((event) => event.phase === phaseNumber));
+      setFilteredEvents(timeline.filter((event) => event.phase === phaseNumber));
     }
-  }, [activePhase]);
+  }, [activePhase, timeline]);
 
   return (
     <section
