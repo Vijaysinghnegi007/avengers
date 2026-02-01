@@ -32,31 +32,31 @@ function ImageModal({ isOpen, image, name, onClose }) {
     <div
       data-name="image-modal-backdrop"
       className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 backdrop-blur-sm"
-      onClick={handleBackdropClick} data-id="xwlogc6dd" data-path="components/ImageModal.js">
+      onClick={handleBackdropClick}>
 
       <div
         data-name="image-modal-content"
-        className="relative max-w-4xl max-h-[90vh] w-full mx-4 modal-entrance" data-id="i43o5xn2m" data-path="components/ImageModal.js">
+        className="relative max-w-4xl max-h-[90vh] w-full mx-4 modal-entrance">
 
         {/* Close button */}
         <button
           data-name="modal-close-button"
           className="absolute top-4 right-4 z-50 text-white bg-black bg-opacity-50 rounded-full w-10 h-10 flex items-center justify-center hover:bg-opacity-70 transition-all duration-300"
-          onClick={onClose} data-id="5sy9asfdl" data-path="components/ImageModal.js">
+          onClick={onClose}>
 
-          <i className="fas fa-times text-xl" data-id="ud8iwwotf" data-path="components/ImageModal.js"></i>
+          <i className="fas fa-times text-xl"></i>
         </button>
         
         {/* Image container with cosmic effects */}
         <div
           data-name="modal-image-container"
-          className="relative rounded-lg overflow-hidden modal-image-container" data-id="0sgfe3k2r" data-path="components/ImageModal.js">
+          className="relative rounded-lg overflow-hidden modal-image-container">
 
           <img
             src={image}
             alt={name}
             className="w-full object-contain max-h-[80vh] modal-image"
-            data-name="modal-hero-image" data-id="3s1nmacvg" data-path="components/ImageModal.js" />
+            data-name="modal-hero-image" />
 
           
           {/* Cosmic energy effect around the image */}
@@ -68,26 +68,26 @@ function ImageModal({ isOpen, image, name, onClose }) {
               background: `radial-gradient(circle at center, transparent 30%, ${characterColor} 150%)`,
               opacity: 0.6,
               mixBlendMode: 'overlay'
-            }} data-id="m5vi6fye5" data-path="components/ImageModal.js">
+            }}>
           </div>
           
           {/* Character name */}
           <div
             data-name="modal-character-name"
-            className="absolute bottom-0 left-0 right-0 p-6 text-center bg-gradient-to-t from-black to-transparent" data-id="f95vb72dy" data-path="components/ImageModal.js">
+            className="absolute bottom-0 left-0 right-0 p-6 text-center bg-gradient-to-t from-black to-transparent">
 
             <h2
               className="text-3xl font-bold text-white hero-text-shadow"
-              style={{ textShadow: `0 0 20px ${characterColor}` }} data-id="ms235xdr2" data-path="components/ImageModal.js">
+              style={{ textShadow: `0 0 20px ${characterColor}` }}>
 
               {name}
             </h2>
           </div>
           
           {/* Cosmic particles */}
-          <div className="modal-particle particle-1" data-id="az63j6vg5" data-path="components/ImageModal.js"></div>
-          <div className="modal-particle particle-2" data-id="ay5m9xgmx" data-path="components/ImageModal.js"></div>
-          <div className="modal-particle particle-3" data-id="2hy9hyxpw" data-path="components/ImageModal.js"></div>
+          <div className="modal-particle particle-1"></div>
+          <div className="modal-particle particle-2"></div>
+          <div className="modal-particle particle-3"></div>
         </div>
       </div>
     </div>);

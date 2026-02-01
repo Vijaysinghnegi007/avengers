@@ -49,20 +49,20 @@ function BackgroundMusic() {
     <div
       data-name="background-music-control"
       className="fixed bottom-6 right-6 z-50 bg-black bg-opacity-70 rounded-full p-3 shadow-lg cursor-pointer hover:bg-opacity-90 transition-all duration-300"
-      onClick={togglePlayback} data-id="8n8318493" data-path="components/BackgroundMusic.js">
+      onClick={togglePlayback}>
 
       <audio
         ref={audioRef}
         src="https://newoaks.s3.us-west-1.amazonaws.com/AutoDev/8360/ffd0bff2-ab81-43db-a37b-887ba897b659.mp3"
-        preload="auto" data-id="w5y4y99c9" data-path="components/BackgroundMusic.js" />
+        preload="auto" />
 
       {isPlaying ?
-      <div data-name="music-playing-icon" className="text-avengers-red animate-pulse" data-id="74xo5il2b" data-path="components/BackgroundMusic.js">
-          <i className="fas fa-volume-up text-xl" data-id="evgouof91" data-path="components/BackgroundMusic.js"></i>
+      <div data-name="music-playing-icon" className="text-avengers-red animate-pulse">
+          <i className="fas fa-volume-up text-xl"></i>
         </div> :
 
-      <div data-name="music-muted-icon" className="text-white" data-id="er2ix5fpk" data-path="components/BackgroundMusic.js">
-          <i className="fas fa-volume-mute text-xl" data-id="ryloxos6h" data-path="components/BackgroundMusic.js"></i>
+      <div data-name="music-muted-icon" className="text-white">
+          <i className="fas fa-volume-mute text-xl"></i>
         </div>
       }
     </div>);

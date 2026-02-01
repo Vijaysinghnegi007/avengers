@@ -33,19 +33,19 @@ function MovieGrid() {
     <section
       id="movies"
       data-name="movies-section"
-      className="py-20 bg-gradient-to-b from-black to-gray-900" data-id="v4nnjxtmd" data-path="components/MovieGrid.js">
+      className="py-20 bg-gradient-to-b from-black to-gray-900">
 
-      <div className="container-custom mx-auto px-4" data-id="vu44nygw8" data-path="components/MovieGrid.js">
-        <div className="text-center mb-12" data-id="i9d117nvv" data-path="components/MovieGrid.js">
+      <div className="container-custom mx-auto px-4">
+        <div className="text-center mb-12">
           <h2
             data-name="movies-title"
-            className="section-title text-white inline-block" data-id="cjzaio2h0" data-path="components/MovieGrid.js">
+            className="section-title text-white inline-block">
 
             The Avengers Saga
           </h2>
           <p
             data-name="movies-subtitle"
-            className="text-gray-300 max-w-2xl mx-auto mt-6" data-id="6llowi6xt" data-path="components/MovieGrid.js">
+            className="text-gray-300 max-w-2xl mx-auto mt-6">
 
             Experience the epic journey of Earth's mightiest heroes as they face threats too great for any one hero to handle.
           </p>
@@ -54,33 +54,33 @@ function MovieGrid() {
         {/* Movie filters */}
         <div
           data-name="movie-filters"
-          className="flex flex-wrap justify-center gap-4 mb-10" data-id="lu70l6o4x" data-path="components/MovieGrid.js">
+          className="flex flex-wrap justify-center gap-4 mb-10">
 
           <button
             data-name="filter-all"
             className={`px-6 py-2 ${activeFilter === 'all' ? 'bg-avengers-blue' : 'bg-gray-800'} text-white rounded-full hover:bg-blue-700 transition-colors duration-300`}
-            onClick={() => setActiveFilter('all')} data-id="55m03fe7t" data-path="components/MovieGrid.js">
+            onClick={() => setActiveFilter('all')}>
 
             All Movies
           </button>
           <button
             data-name="filter-phase1"
             className={`px-6 py-2 ${activeFilter === 'phase1' ? 'bg-avengers-red' : 'bg-gray-800'} text-white rounded-full hover:bg-red-700 transition-colors duration-300`}
-            onClick={() => setActiveFilter('phase1')} data-id="qdu2cmdrx" data-path="components/MovieGrid.js">
+            onClick={() => setActiveFilter('phase1')}>
 
             Phase 1
           </button>
           <button
             data-name="filter-phase2"
             className={`px-6 py-2 ${activeFilter === 'phase2' ? 'bg-avengers-gold' : 'bg-gray-800'} text-white rounded-full hover:bg-yellow-600 transition-colors duration-300`}
-            onClick={() => setActiveFilter('phase2')} data-id="j5j7q8tgz" data-path="components/MovieGrid.js">
+            onClick={() => setActiveFilter('phase2')}>
 
             Phase 2
           </button>
           <button
             data-name="filter-phase3"
             className={`px-6 py-2 ${activeFilter === 'phase3' ? 'bg-avengers-blue' : 'bg-gray-800'} text-white rounded-full hover:bg-blue-700 transition-colors duration-300`}
-            onClick={() => setActiveFilter('phase3')} data-id="vmnoknbpu" data-path="components/MovieGrid.js">
+            onClick={() => setActiveFilter('phase3')}>
 
             Phase 3
           </button>
@@ -89,13 +89,13 @@ function MovieGrid() {
         {/* Movies grid */}
         <div
           data-name="movies-grid"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" data-id="xi29ubeo2" data-path="components/MovieGrid.js">
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
           {filteredMovies.map((movie) =>
           <MovieCard
             key={movie.id}
             movie={movie}
-            onViewDetails={handleViewDetails} data-id="607i2e055" data-path="components/MovieGrid.js" />
+            onViewDetails={handleViewDetails} />
 
           )}
         </div>
@@ -103,14 +103,14 @@ function MovieGrid() {
         {/* More movies button */}
         <div
           data-name="more-movies"
-          className="text-center mt-12" data-id="txvikntk8" data-path="components/MovieGrid.js">
+          className="text-center mt-12">
 
           <a
             href="https://www.marvel.com/movies"
             target="_blank"
             rel="noopener noreferrer"
             data-name="more-movies-button"
-            className="avengers-button px-8 py-3 inline-block" data-id="0p6ae73v2" data-path="components/MovieGrid.js">
+            className="avengers-button px-8 py-3 inline-block">
 
             Explore All Marvel Movies
           </a>
@@ -120,7 +120,7 @@ function MovieGrid() {
         <MovieDetailsModal
           isOpen={isModalOpen}
           movie={selectedMovie}
-          onClose={closeModal} data-id="1dwx4qgmv" data-path="components/MovieGrid.js" />
+          onClose={closeModal} />
 
       </div>
     </section>);
