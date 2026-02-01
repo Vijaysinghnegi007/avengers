@@ -164,37 +164,37 @@ function App() {
 
   if (isLoading) {
     return (
-      <div data-name="loading-screen" className="min-h-screen bg-black flex items-center justify-center" data-id="j3n2sf089" data-path="app.js">
-        <div className="text-center max-w-md px-4" data-id="30eb3r5r9" data-path="app.js">
-          <div className="w-16 h-16 border-4 border-avengers-red border-t-transparent rounded-full animate-spin mx-auto mb-4" data-id="gd923tlyh" data-path="app.js"></div>
-          <h2 className="text-white text-xl mb-2" data-id="2253nubkv" data-path="app.js">Assembling Heroes...</h2>
-          <p className="text-gray-400 text-sm mb-4" data-id="tsqwzx9z2" data-path="app.js">
+      <div data-name="loading-screen" className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-center max-w-md px-4">
+          <div className="w-16 h-16 border-4 border-avengers-red border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <h2 className="text-white text-xl mb-2">Assembling Heroes...</h2>
+          <p className="text-gray-400 text-sm mb-4">
             {assetsLoaded ? 'Preparing universe...' : `${loadingStage} ${loadingProgress}%`}
           </p>
-          <div className="w-full bg-gray-800 rounded-full h-2.5 mb-4" data-id="ujn5s7a20" data-path="app.js">
+          <div className="w-full bg-gray-800 rounded-full h-2.5 mb-4">
             <div
               data-name="loading-progress-bar"
               className="bg-gradient-to-r from-avengers-red to-avengers-blue h-2.5 rounded-full transition-all duration-300"
-              style={{ width: `${loadingProgress}%` }} data-id="2898x1c6w" data-path="app.js">
+              style={{ width: `${loadingProgress}%` }}>
             </div>
           </div>
-          <p className="text-gray-500 text-xs italic" data-id="s9uf1cxks" data-path="app.js">The Avengers are assembling from across the universe</p>
+          <p className="text-gray-500 text-xs italic">The Avengers are assembling from across the universe</p>
         </div>
       </div>);
 
   }
 
   return (
-    <div data-name="app-container" className="min-h-screen bg-black" data-id="wgwgubit0" data-path="app.js">
-      <Navbar data-id="14l8rgpe5" data-path="app.js" />
-      <Hero data-id="f0tt8w94x" data-path="app.js" />
-      <MovieGrid data-id="on1ake5a0" data-path="app.js" />
-      <CharacterGrid data-id="k0wxn2cfi" data-path="app.js" />
-      <Timeline data-id="trws158xv" data-path="app.js" />
-      <NewsSection data-id="ltt0zo2h8" data-path="app.js" />
-      <FAQ data-id="r547scbcd" data-path="app.js" />
-      <Footer data-id="cgkt3n8x3" data-path="app.js" />
-      <BackgroundMusic data-id="twfmiitt8" data-path="app.js" />
+    <div data-name="app-container" className="min-h-screen bg-black">
+      <Navbar />
+      <Hero />
+      <MovieGrid />
+      <CharacterGrid />
+      <Timeline />
+      <NewsSection />
+      <FAQ />
+      <Footer />
+      <BackgroundMusic />
     </div>);
 
 }
@@ -202,4 +202,4 @@ function App() {
 // Render the App to the DOM
 const rootElement = document.getElementById('root');
 const root = ReactDOM.createRoot(rootElement);
-root.render(<App data-id="dyniq9q1c" data-path="app.js" />);
+root.render(<App />);
